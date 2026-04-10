@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AirPods Authenticity LLM Response",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "classification",
+    "confidence",
+    "fake_probability",
+    "authentic_probability",
+    "summary",
+    "key_findings",
+    "contradictions",
+    "missing_evidence",
+    "recommended_next_checks"
+  ],
+  "properties": {
+    "classification": {
+      "type": "string",
+      "enum": [
+        "likely_authentic",
+        "leaning_authentic",
+        "inconclusive",
+        "leaning_fake",
+        "likely_fake",
+        "mixed_evidence"
+      ]
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "fake_probability": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "authentic_probability": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "key_findings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "contradictions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "missing_evidence": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "recommended_next_checks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

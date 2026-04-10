@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AirProof | Checklist passo a passo</title>
+    <meta
+      name="description"
+      content="Checklist guiado e adaptativo para verificar se um AirPods comprado pode ser original ou falso."
+    />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body data-page="checklist">
+    <div class="first-visit-loader" id="firstVisitLoader" aria-hidden="true">
+      <div class="loader-grid"></div>
+      <div class="loader-core">
+        <div class="loader-logo" aria-hidden="true">
+          <svg viewBox="0 0 64 78" role="img">
+            <path
+              d="M42.7 12.6c3.2-3.8 5.2-9 4.6-12.6-4.7.2-10 3.1-13.1 6.9-2.9 3.4-5.5 8.7-4.7 12.1 5 .4 10.1-2.6 13.2-6.4Zm11.4 28.7c-.2-10 8.1-14.8 8.5-15.1-4.7-6.8-11.9-7.7-14.4-7.8-6.1-.7-11.8 3.6-14.9 3.6-3.2 0-8-3.5-13.2-3.4-6.8.1-13 4-16.5 10-7.2 12.4-1.8 30.7 5.1 40.7 3.4 4.9 7.3 10.4 12.6 10.2 5.1-.2 7.1-3.3 13.3-3.3s8 3.3 13.3 3.2c5.5-.1 9-5 12.3-9.9 3.9-5.6 5.5-11.1 5.6-11.4-.1 0-10.5-4-10.7-16.8Z"
+            ></path>
+          </svg>
+        </div>
+        <svg class="hello-stroke" viewBox="0 0 520 120" aria-hidden="true">
+          <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle">olá</text>
+        </svg>
+        <p>Checklist guiado para validar seu AirPods com mais segurança.</p>
+      </div>
+    </div>
+
+    <div class="noise"></div>
+    <div class="theme-transition" id="themeTransition" aria-hidden="true"></div>
+    <div class="activity-overlay" id="activityOverlay" aria-hidden="true">
+      <canvas class="activity-warp-canvas" id="activityWarpCanvas"></canvas>
+      <div class="activity-card">
+        <span class="eyebrow">Modo repouso</span>
+        <h2>Sem interação por 2 minutos.</h2>
+        <p>Volte quando quiser continuar o checklist guiado.</p>
+      </div>
+    </div>
+
+    <header class="site-header">
+      <nav class="navbar shell">
+        <a class="brand" href="./index.html" aria-label="AirProof">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 64 78" role="img">
+              <path
+                d="M42.7 12.6c3.2-3.8 5.2-9 4.6-12.6-4.7.2-10 3.1-13.1 6.9-2.9 3.4-5.5 8.7-4.7 12.1 5 .4 10.1-2.6 13.2-6.4Zm11.4 28.7c-.2-10 8.1-14.8 8.5-15.1-4.7-6.8-11.9-7.7-14.4-7.8-6.1-.7-11.8 3.6-14.9 3.6-3.2 0-8-3.5-13.2-3.4-6.8.1-13 4-16.5 10-7.2 12.4-1.8 30.7 5.1 40.7 3.4 4.9 7.3 10.4 12.6 10.2 5.1-.2 7.1-3.3 13.3-3.3s8 3.3 13.3 3.2c5.5-.1 9-5 12.3-9.9 3.9-5.6 5.5-11.1 5.6-11.4-.1 0-10.5-4-10.7-16.8Z"
+              ></path>
+            </svg>
+          </span>
+          <span class="brand-text">AirProof</span>
+        </a>
+
+        <div class="nav-links">
+          <a href="./index.html#analise-ia">IA</a>
+          <a href="./index.html#sinais">Sinais</a>
+          <a href="./checklist.html">Checklist</a>
+          <a href="./galeria.html">Galeria</a>
+        </div>
+
+        <div class="nav-actions">
+          <div class="theme-switcher" id="themeSwitcher" aria-label="Trocar tema">
+            <div class="theme-switcher-glow"></div>
+            <button type="button" class="theme-option is-active" data-theme-value="light" aria-label="Tema claro">☀</button>
+            <button type="button" class="theme-option" data-theme-value="dark" aria-label="Tema escuro">◑</button>
+            <button type="button" class="theme-option" data-theme-value="dim" aria-label="Tema intermediário">☽</button>
+            <span class="theme-thumb"></span>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="checklist-page shell">
+      <section class="section page-hero checklist-hero reveal">
+        <span class="eyebrow">Rota de checklist</span>
+        <h1>Uma verificação guiada, passo a passo, para reduzir ao máximo a dúvida.</h1>
+        <p>
+          O sistema faz perguntas adaptativas sobre caixa, serial, software, acabamento, encaixe
+          e comportamento real do dispositivo. Quanto mais você responder, maior a cobertura da análise.
+        </p>
+      </section>
+
+      <section class="section checklist-layout">
+        <aside class="checklist-sidebar glass-card reveal">
+          <span class="micro-label">Cobertura do caso</span>
+          <h2 id="checklistSidebarTitle">Ainda no começo.</h2>
+          <p id="checklistSidebarText">
+            Responda as perguntas em sequência. O sistema vai aprofundar os pontos críticos conforme você avança.
+          </p>
+
+          <div class="checklist-progress">
+            <div class="meter"><span id="checklistProgressBar"></span></div>
+            <div class="checklist-progress-meta">
+              <strong id="checklistProgressLabel">0%</strong>
+              <span id="checklistStepLabel">0 respostas úteis</span>
+            </div>
+          </div>
+
+          <div class="checklist-risk-cards">
+            <article class="score-card">
+              <span>Sinais pró-falso</span>
+              <strong id="checklistFakeCount">0</strong>
+            </article>
+            <article class="score-card">
+              <span>Sinais pró-original</span>
+              <strong id="checklistAuthenticCount">0</strong>
+            </article>
+          </div>
+
+          <div class="checklist-live-list">
+            <h3>Achados acumulados</h3>
+            <ul id="checklistLiveFindings"></ul>
+          </div>
+        </aside>
+
+        <div class="checklist-main">
+          <article class="checklist-wizard glass-card reveal" id="checklistWizard">
+            <div class="checklist-wizard-head">
+              <span class="faq-badge">Checklist adaptativo</span>
+              <span class="checklist-counter" id="checklistCounter">Pergunta 1</span>
+            </div>
+
+            <div class="checklist-question-wrap" id="checklistQuestionWrap">
+              <h2 id="checklistQuestionTitle">Preparando perguntas...</h2>
+              <p id="checklistQuestionDetail"></p>
+              <div class="checklist-options" id="checklistOptions"></div>
+            </div>
+
+            <div class="checklist-nav">
+              <button type="button" class="button button-secondary" id="checklistBackButton">Anterior</button>
+              <button type="button" class="button button-primary" id="checklistNextButton">Próxima</button>
+            </div>
+          </article>
+
+          <article class="checklist-finish glass-card reveal">
+            <div class="section-heading">
+              <span class="eyebrow">Fechamento</span>
+              <h2>Quando houver cobertura suficiente, a IA consolida o laudo.</h2>
+              <p>
+                O laudo final usa a OpenRouter para revisar o pacote de evidências e combinar isso
+                com o motor local de regras do AirProof.
+              </p>
+            </div>
+            <div class="ai-actions">
+              <button type="button" class="button button-primary" id="checklistAnalyzeButton">Gerar laudo final</button>
+              <button type="button" class="button button-secondary" id="checklistResetButton">Recomeçar checklist</button>
+            </div>
+          </article>
+
+          <article class="checklist-report glass-card reveal" id="checklistReport">
+            <div class="ai-result-empty" id="checklistReportEmpty">
+              <span class="micro-label">Resultado final</span>
+              <h3>Aguardando respostas suficientes.</h3>
+              <p>Complete o checklist e gere um laudo consolidado com IA.</p>
+            </div>
+
+            <div class="ai-result-body" id="checklistReportBody" hidden>
+              <div class="ai-result-head">
+                <div>
+                  <span class="micro-label">Laudo final</span>
+                  <h3 id="checklistClassification">inconclusive</h3>
+                </div>
+                <span class="ai-status-badge" id="checklistStatusBadge">Checklist + IA</span>
+              </div>
+
+              <div class="ai-meters">
+                <div class="score-card">
+                  <span>Probabilidade de falso</span>
+                  <strong id="checklistFakeProbability">0%</strong>
+                  <div class="meter"><span id="checklistFakeBar"></span></div>
+                </div>
+                <div class="score-card">
+                  <span>Confiança</span>
+                  <strong id="checklistConfidence">0%</strong>
+                  <div class="meter"><span id="checklistConfidenceBar"></span></div>
+                </div>
+              </div>
+
+              <p class="ai-summary" id="checklistSummary"></p>
+
+              <div class="ai-columns">
+                <div>
+                  <h4>Razões principais</h4>
+                  <ul id="checklistFindings"></ul>
+                </div>
+                <div>
+                  <h4>Próximos testes</h4>
+                  <ul id="checklistNextChecks"></ul>
+                </div>
+              </div>
+
+              <div class="ai-columns">
+                <div>
+                  <h4>Contradições</h4>
+                  <ul id="checklistContradictions"></ul>
+                </div>
+                <div>
+                  <h4>Avisos</h4>
+                  <ul id="checklistWarnings"></ul>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer compact-footer">
+      <div class="shell footer-shell">
+        <div class="footer-top">
+          <div>
+            <span class="eyebrow">Continue verificando</span>
+            <h2>AirProof</h2>
+            <p>Se quiser reforçar a análise, compare com a galeria completa e o painel manual da home.</p>
+          </div>
+          <div class="footer-links">
+            <a href="./index.html">Página inicial</a>
+            <a href="./index.html#analise-ia">Análise IA</a>
+            <a href="./galeria.html">Galeria completa</a>
+          </div>
+        </div>
+        <div class="footer-brand-shadow">CHECKLIST</div>
+        <div class="footer-badge">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 64 78" role="img">
+              <path
+                d="M42.7 12.6c3.2-3.8 5.2-9 4.6-12.6-4.7.2-10 3.1-13.1 6.9-2.9 3.4-5.5 8.7-4.7 12.1 5 .4 10.1-2.6 13.2-6.4Zm11.4 28.7c-.2-10 8.1-14.8 8.5-15.1-4.7-6.8-11.9-7.7-14.4-7.8-6.1-.7-11.8 3.6-14.9 3.6-3.2 0-8-3.5-13.2-3.4-6.8.1-13 4-16.5 10-7.2 12.4-1.8 30.7 5.1 40.7 3.4 4.9 7.3 10.4 12.6 10.2 5.1-.2 7.1-3.3 13.3-3.3s8 3.3 13.3 3.2c5.5-.1 9-5 12.3-9.9 3.9-5.6 5.5-11.1 5.6-11.4-.1 0-10.5-4-10.7-16.8Z"
+              ></path>
+            </svg>
+          </span>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2026 AirProof.</p>
+          <p>Checklist adaptativo com laudo probabilístico. Nunca trate um único detalhe como prova isolada.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="./app.js"></script>
+    <script src="./checklist.js"></script>
+  </body>
+</html>

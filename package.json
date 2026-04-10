@@ -1,0 +1,11 @@
+{
+  "name": "airproof",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Detector visual e assistido por IA para AirPods falsos",
+  "scripts": {
+    "start": "node server.js",
+    "check:detector": "node --check detector-llm.js",
+    "check:site": "node --check app.js"
+  }
+}

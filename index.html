@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AirProof | Identifique AirPods Pro falsificados</title>
+    <meta
+      name="description"
+      content="Guia visual para identificar AirPods Pro falsificados com segurança antes de comprar."
+    />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body data-page="home">
+    <div class="first-visit-loader" id="firstVisitLoader" aria-hidden="true">
+      <div class="loader-grid"></div>
+      <div class="loader-core">
+        <div class="loader-logo" aria-hidden="true">
+          <svg viewBox="0 0 64 78" role="img">
+            <path
+              d="M42.7 12.6c3.2-3.8 5.2-9 4.6-12.6-4.7.2-10 3.1-13.1 6.9-2.9 3.4-5.5 8.7-4.7 12.1 5 .4 10.1-2.6 13.2-6.4Zm11.4 28.7c-.2-10 8.1-14.8 8.5-15.1-4.7-6.8-11.9-7.7-14.4-7.8-6.1-.7-11.8 3.6-14.9 3.6-3.2 0-8-3.5-13.2-3.4-6.8.1-13 4-16.5 10-7.2 12.4-1.8 30.7 5.1 40.7 3.4 4.9 7.3 10.4 12.6 10.2 5.1-.2 7.1-3.3 13.3-3.3s8 3.3 13.3 3.2c5.5-.1 9-5 12.3-9.9 3.9-5.6 5.5-11.1 5.6-11.4-.1 0-10.5-4-10.7-16.8Z"
+            ></path>
+          </svg>
+        </div>
+        <svg class="hello-stroke" viewBox="0 0 520 120" aria-hidden="true">
+          <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle">olá</text>
+        </svg>
+        <p>Seu guia visual para comprar AirPods Pro com segurança.</p>
+      </div>
+    </div>
+
+    <div class="noise"></div>
+    <div class="theme-transition" id="themeTransition" aria-hidden="true"></div>
+    <div class="activity-overlay" id="activityOverlay" aria-hidden="true">
+      <canvas class="activity-warp-canvas" id="activityWarpCanvas"></canvas>
+      <div class="activity-card">
+        <span class="eyebrow">Modo repouso</span>
+        <h2>Sem interação por 2 minutos.</h2>
+        <p>O guia continua pronto. Toque, mova o mouse ou pressione uma tecla para voltar.</p>
+      </div>
+    </div>
+
+    <header class="site-header">
+      <nav class="navbar shell">
+        <a class="brand" href="#top" aria-label="AirProof">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 64 78" role="img">
+              <path
+                d="M42.7 12.6c3.2-3.8 5.2-9 4.6-12.6-4.7.2-10 3.1-13.1 6.9-2.9 3.4-5.5 8.7-4.7 12.1 5 .4 10.1-2.6 13.2-6.4Zm11.4 28.7c-.2-10 8.1-14.8 8.5-15.1-4.7-6.8-11.9-7.7-14.4-7.8-6.1-.7-11.8 3.6-14.9 3.6-3.2 0-8-3.5-13.2-3.4-6.8.1-13 4-16.5 10-7.2 12.4-1.8 30.7 5.1 40.7 3.4 4.9 7.3 10.4 12.6 10.2 5.1-.2 7.1-3.3 13.3-3.3s8 3.3 13.3 3.2c5.5-.1 9-5 12.3-9.9 3.9-5.6 5.5-11.1 5.6-11.4-.1 0-10.5-4-10.7-16.8Z"
+              ></path>
+            </svg>
+          </span>
+          <span class="brand-text">AirProof</span>
+        </a>
+
+        <div class="nav-links">
+          <a href="#sinais">Sinais</a>
+          <a href="#analise-ia">IA</a>
+          <a href="./checklist.html">Checklist</a>
+          <a href="#protocolo">Protocolo</a>
+          <a href="#comparador">Comparador</a>
+          <a href="#faq">FAQ</a>
+          <a href="#galeria-preview">Fotos</a>
+          <a href="#rodape">Comprar com segurança</a>
+        </div>
+
+        <div class="nav-actions">
+          <div class="notification">
+            <button class="icon-button notification-trigger" id="notificationTrigger" aria-expanded="false" aria-label="Notificações">
+              <span class="bell-icon" aria-hidden="true"></span>
+              <span class="notification-count" id="notificationCount">4</span>
+            </button>
+            <div class="notification-popover" id="notificationPopover" hidden>
+              <div class="popover-head">
+                <strong>Alertas rápidos</strong>
+                <button type="button" id="markRead">Marcar tudo como lido</button>
+              </div>
+              <div class="popover-list" id="notificationList"></div>
+            </div>
+          </div>
+
+          <div class="theme-switcher" id="themeSwitcher" aria-label="Trocar tema">
+            <div class="theme-switcher-glow"></div>
+            <button type="button" class="theme-option is-active" data-theme-value="light" aria-label="Tema claro">☀</button>
+            <button type="button" class="theme-option" data-theme-value="dark" aria-label="Tema escuro">◑</button>
+            <button type="button" class="theme-option" data-theme-value="dim" aria-label="Tema intermediário">☽</button>
+            <span class="theme-thumb"></span>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero shell">
+        <div class="hero-backdrop">
+          <div class="hero-dot-grid"></div>
+          <div class="hero-gradient hero-gradient-a"></div>
+          <div class="hero-gradient hero-gradient-b"></div>
+        </div>
+        <div class="hero-copy">
+          <span class="eyebrow">Guia visual independente</span>
+          <h1>Como identificar AirPods Pro falsificado antes de pagar caro.</h1>
+          <p>
+            Compare acabamento, número serial, construção da caixa, borrachinhas, MagSafe,
+            som de carregamento e detalhes de fabricação usando provas visuais reais.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#sinais">Ver sinais críticos</a>
+            <a class="button button-secondary" href="./checklist.html">Abrir checklist guiado</a>
+            <a class="button button-secondary" href="./galeria.html">Abrir fotos completas</a>
+          </div>
+          <dl class="hero-stats">
+            <div>
+              <dt>32</dt>
+              <dd>evidências visuais catalogadas</dd>
+            </div>
+            <div>
+              <dt>2 min</dt>
+              <dd>para revisar antes da compra</dd>
+            </div>
+            <div>
+              <dt>1 foco</dt>
+              <dd>comprar com mais segurança</dd>
+            </div>
+          </dl>
+        </div>
+        <div class="hero-panels">
+          <article class="glass-card hero-card hero-card-main">
+            <span class="card-badge">Checklist imediato</span>
+            <h2>Antes de fechar negócio, confira:</h2>
+            <ul class="check-list">
+              <li>USB da caixa: branco no original, preto em muitas réplicas.</li>
+              <li>Número serial precisa bater entre caixa e iPhone.</li>
+              <li>MagSafe, acabamento traseiro e tampa entregam muita coisa.</li>
+            </ul>
+          </article>
+          <article class="glass-card hero-card hero-card-float">
+            <span class="micro-label">Alerta visual</span>
+            <strong>Falsos costumam ter tampa frágil, escrita torta e materiais mais plásticos.</strong>
+          </article>
+        </div>
+      </section>
+
+      <section class="section shell reveal" id="sinais">
+        <div class="section-heading reveal">
+          <span class="eyebrow">Sinais mais confiáveis</span>
+          <h2>Os indícios que mais se repetem entre original e réplica.</h2>
+        </div>
+        <div class="signal-grid" id="signalGrid"></div>
+      </section>
+
+      <section class="section shell reveal" id="manifesto">
+        <div class="immersive-panel glass-card reveal">
+          <div class="immersive-copy">
+            <span class="eyebrow">Mais do que aparência</span>
+            <h2>AirPods Pro falso quase sempre falha em consistência.</h2>
+            <p>
+              O problema raramente aparece em um único detalhe. Ele aparece no conjunto:
+              serial que não bate, materiais mais simples, tampa mais frágil, software com
+              menos opções, encaixe ruim e acabamento com desvios visíveis.
+            </p>
+          </div>
+          <div class="spec-orbit">
+            <div class="spec-pill reveal">Serial igual na caixa e no telefone</div>
+            <div class="spec-pill reveal">Made in Vietnam na traseira</div>
+            <div class="spec-pill reveal">MagSafe na caixa correta</div>
+            <div class="spec-pill reveal">USB branca no original</div>
+            <div class="spec-pill reveal">Som de carregamento sutil</div>
+            <div class="spec-pill reveal">Borrachinhas firmes</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section shell ai-section reveal" id="analise-ia">
+        <div class="section-heading reveal">
+          <span class="eyebrow">Análise por IA</span>
+          <h2>Motor avançado com OpenRouter e LLM para detectar AirPods falsos em minutos.</h2>
+          <p>
+            Selecione os sinais observados no produto, adicione contexto e receba uma avaliação
+            probabilística com score de falsificação, confiança, contradições e próximos testes.
+          </p>
+        </div>
+        <div class="ai-layout">
+          <form class="ai-form glass-card reveal" id="aiAnalysisForm">
+            <div class="ai-form-top">
+              <label class="field">
+                <span>Família</span>
+                <select name="deviceFamily">
+                  <option value="AirPods Pro">AirPods Pro</option>
+                  <option value="AirPods">AirPods</option>
+                  <option value="AirPods Max">AirPods Max</option>
+                </select>
+              </label>
+              <label class="field">
+                <span>Versão alegada</span>
+                <select name="claimedVersion">
+                  <option value="unknown">Não sei</option>
+                  <option value="1st generation">1ª geração</option>
+                  <option value="2nd generation">2ª geração</option>
+                  <option value="USB-C version">Versão USB-C</option>
+                </select>
+              </label>
+              <label class="field">
+                <span>Qualidade geral da evidência</span>
+                <input type="range" name="globalQuality" min="0.4" max="1" step="0.05" value="0.9" />
+              </label>
+            </div>
+
+            <div class="ai-groups" id="aiFeatureGroups"></div>
+
+            <label class="field field-notes">
+              <span>Observações adicionais</span>
+              <textarea
+                name="notes"
+                rows="6"
+                placeholder="Ex.: o vendedor diz que é original, mas a tampa parece frágil e o iPhone mostra menos opções do que o esperado."
+              ></textarea>
+            </label>
+
+            <div class="ai-actions">
+              <button type="submit" class="button button-primary" id="aiSubmitButton">Analisar com IA</button>
+              <button type="button" class="button button-secondary" id="aiPresetButton">Preencher caso suspeito</button>
+            </div>
+            <p class="ai-disclaimer">
+              A análise é probabilística. O ideal é combinar várias evidências físicas e de software.
+            </p>
+          </form>
+
+          <aside class="ai-result glass-card reveal" id="aiResultPanel">
+            <div class="ai-result-empty" id="aiEmptyState">
+              <span class="micro-label">Resultado estruturado</span>
+              <h3>Aguardando sinais do dispositivo.</h3>
+              <p>Selecione evidências acima para gerar um laudo técnico com score, confiança e recomendações.</p>
+            </div>
+
+            <div class="ai-result-body" id="aiResultBody" hidden>
+              <div class="ai-result-head">
+                <div>
+                  <span class="micro-label">Classificação</span>
+                  <h3 id="aiClassification">inconclusive</h3>
+                </div>
+                <span class="ai-status-badge" id="aiStatusBadge">IA ativa</span>
+              </div>
+
+              <div class="ai-meters">
+                <div class="score-card">
+                  <span>Probabilidade de falso</span>
+                  <strong id="aiFakeProbability">0%</strong>
+                  <div class="meter"><span id="aiFakeBar"></span></div>
+                </div>
+                <div class="score-card">
+                  <span>Confiança</span>
+                  <strong id="aiConfidence">0%</strong>
+                  <div class="meter"><span id="aiConfidenceBar"></span></div>
+                </div>
+              </div>
+
+              <p class="ai-summary" id="aiSummary"></p>
+
+              <div class="ai-columns">
+                <div>
+                  <h4>Achados principais</h4>
+                  <ul id="aiFindings"></ul>
+                </div>
+                <div>
+                  <h4>Próximos testes</h4>
+                  <ul id="aiNextChecks"></ul>
+                </div>
+              </div>
+
+              <div class="ai-columns">
+                <div>
+                  <h4>Contradições</h4>
+                  <ul id="aiContradictions"></ul>
+                </div>
+                <div>
+                  <h4>Avisos</h4>
+                  <ul id="aiWarnings"></ul>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section shell reveal" id="protocolo">
+        <div class="section-heading reveal">
+          <span class="eyebrow">Protocolo de compra</span>
+          <h2>Uma sequência curta para testar o produto antes de confiar.</h2>
+        </div>
+        <div class="purchase-protocol">
+          <article class="protocol-step glass-card reveal">
+            <span class="protocol-index">01</span>
+            <div>
+              <h3>Revise caixa e materiais</h3>
+              <p>Observe papel, plástico interno, separadores, bordas e firmeza da tampa.</p>
+            </div>
+            <img src="image/31.png" alt="Caixa original em papel" />
+          </article>
+          <article class="protocol-step glass-card reveal">
+            <span class="protocol-index">02</span>
+            <div>
+              <h3>Confira serial e origem</h3>
+              <p>Compare o número serial na caixa e no telefone, e valide a gravação traseira.</p>
+            </div>
+            <img src="image/10.png" alt="Comparação do serial" />
+          </article>
+          <article class="protocol-step glass-card reveal">
+            <span class="protocol-index">03</span>
+            <div>
+              <h3>Teste encaixe e recursos</h3>
+              <p>Veja se as borrachinhas ficam presas e se as opções de software fazem sentido.</p>
+            </div>
+            <img src="image/16.png" alt="Borrachinhas firmes no original" />
+          </article>
+        </div>
+      </section>
+
+      <section class="section shell reveal" id="detalhes-premium">
+        <div class="feature-marquee">
+          <article class="feature-panel feature-panel-large glass-card reveal">
+            <div class="feature-copy">
+              <span class="eyebrow">Acabamento</span>
+              <h2>Borda, tom e escrita ainda entregam muita coisa.</h2>
+              <p>
+                Réplicas costumam errar no alinhamento do texto, no tom da peça traseira e nas
+                curvas da caixa. Quando o objeto tenta parecer premium, esses desvios ficam mais claros.
+              </p>
+            </div>
+            <img src="image/28.png" alt="Comparação da parte traseira" />
+          </article>
+          <div class="feature-stack">
+            <article class="feature-panel glass-card reveal">
+              <span class="micro-label">Software</span>
+              <strong>Atualizações beta e mais modos aparecem como pistas do original.</strong>
+              <img src="image/32.png" alt="Atualizações beta no original" />
+            </article>
+            <article class="feature-panel glass-card reveal">
+              <span class="micro-label">Energia</span>
+              <strong>MagSafe e comportamento da caixa ajudam a reduzir dúvida rápido.</strong>
+              <img src="image/24.png" alt="Caixa com MagSafe" />
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section shell comparator reveal" id="comparador">
+        <div class="section-heading reveal">
+          <span class="eyebrow">Efeito de imagens</span>
+          <h2>Compare cada evidência como se estivesse girando o produto nas mãos.</h2>
+        </div>
+        <div class="testimonial-stage glass-card reveal">
+          <div class="testimonial-visuals" id="testimonialVisuals"></div>
+          <div class="testimonial-copy">
+            <span class="micro-label">Análise em destaque</span>
+            <h3 id="testimonialTitle"></h3>
+            <p class="testimonial-caption" id="testimonialCaption"></p>
+            <p class="testimonial-quote" id="testimonialQuote"></p>
+            <div class="testimonial-actions">
+              <button type="button" class="arrow-button" id="prevTestimonial" aria-label="Anterior">←</button>
+              <button type="button" class="arrow-button" id="nextTestimonial" aria-label="Próximo">→</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section shell reveal" id="matriz">
+        <div class="section-heading reveal">
+          <span class="eyebrow">Resumo técnico</span>
+          <h2>Se vários pontos abaixo falharem ao mesmo tempo, desconfie.</h2>
+        </div>
+        <div class="auth-grid">
+          <article class="auth-card glass-card reveal">
+            <h3>Construção</h3>
+            <p>Tampa firme, borda correta, papel na caixa e proteção interna bem resolvida.</p>
+          </article>
+          <article class="auth-card glass-card reveal">
+            <h3>Compatibilidade</h3>
+            <p>Troca automática entre dispositivos Apple e mais opções reais de configuração.</p>
+          </article>
+          <article class="auth-card glass-card reveal">
+            <h3>Identificação</h3>
+            <p>Serial coerente, escrita traseira correta e indicação de fabricação compatível.</p>
+          </article>
+          <article class="auth-card glass-card reveal">
+            <h3>Uso diário</h3>
+            <p>Som de carregamento discreto, cancelamento consistente e encaixe firme das pontas.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section shell arc-section reveal" id="galeria-preview">
+        <div class="section-heading reveal">
+          <span class="eyebrow">Seção de imagens</span>
+          <h2>Prévia em arco com as fotos que mais ajudam a evitar golpe.</h2>
+          <p>
+            Abra a galeria completa para ver todas as imagens, especificações observadas e o texto
+            associado a cada comparação.
+          </p>
+        </div>
+        <div class="arc-gallery glass-card reveal" id="arcGallery">
+          <div class="arc-stage" id="arcStage"></div>
+          <div class="arc-copy">
+            <h3>Detalhes completos, sem pressa.</h3>
+            <p>
+              A página dedicada organiza todas as 32 provas visuais por acabamento, caixa, serial,
+              encaixe, som, MagSafe e fabricação.
+            </p>
+            <a class="button button-primary" href="./galeria.html">Ver fotos e especificações completas</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section shell faq-section reveal" id="faq">
+        <div class="faq-head reveal">
+          <span class="faq-badge">FAQ</span>
+          <h2>Perguntas comuns e respostas rápidas</h2>
+          <p>
+            Uma revisão curta para quem quer validar um AirPods Pro antes de comprar e
+            reduzir o risco de cair em réplica.
+          </p>
+        </div>
+        <div class="faq-list">
+          <article class="faq-item reveal">
+            <span class="faq-index">1</span>
+            <div>
+              <h3>Qual é o primeiro detalhe que vale conferir?</h3>
+              <p>
+                Comece pela consistência geral: caixa, tampa, serial, acabamento e porta.
+                Réplicas até podem acertar um ponto isolado, mas costumam falhar no conjunto.
+              </p>
+            </div>
+          </article>
+          <article class="faq-item reveal">
+            <span class="faq-index">2</span>
+            <div>
+              <h3>Se o número serial existir, isso já prova que é original?</h3>
+              <p>
+                Não. O arquivo informativo destaca que o serial da réplica pode não bater entre
+                caixa e telefone. O importante é a coerência entre as referências, não só a existência do código.
+              </p>
+            </div>
+          </article>
+          <article class="faq-item reveal">
+            <span class="faq-index">3</span>
+            <div>
+              <h3>O MagSafe ajuda mesmo na identificação?</h3>
+              <p>
+                Ajuda como pista. A presença e o acabamento correto da caixa com MagSafe podem
+                fortalecer a análise, mas ainda devem ser combinados com outros sinais físicos.
+              </p>
+            </div>
+          </article>
+          <article class="faq-item reveal">
+            <span class="faq-index">4</span>
+            <div>
+              <h3>O que mais denuncia uma réplica no uso real?</h3>
+              <p>
+                Cancelamento de ruído com comportamento estranho, menos modos de configuração,
+                som de carregamento fora do padrão e borrachinhas que caem com facilidade.
+              </p>
+            </div>
+          </article>
+          <article class="faq-item reveal">
+            <span class="faq-index">5</span>
+            <div>
+              <h3>Uma única foto é suficiente para concluir?</h3>
+              <p>
+                Não é o ideal. O caminho mais seguro é cruzar várias evidências: embalagem,
+                serial, materiais, traseira, MagSafe, software e encaixe das pontas.
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer" id="rodape">
+      <div class="shell footer-shell">
+        <div class="footer-top">
+          <div>
+            <span class="eyebrow">Compre com segurança</span>
+            <h2>AirProof</h2>
+            <p>
+              Um guia visual para ajudar qualquer pessoa a reconhecer sinais frequentes de AirPods
+              Pro falsificados antes da compra.
+            </p>
+          </div>
+          <div class="footer-links">
+            <a href="#top">Início</a>
+            <a href="./checklist.html">Checklist guiado</a>
+            <a href="#sinais">Sinais críticos</a>
+            <a href="#comparador">Comparador</a>
+            <a href="./galeria.html">Galeria completa</a>
+          </div>
+        </div>
+        <div class="footer-brand-shadow">AIRPROOF</div>
+        <div class="footer-badge">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 64 78" role="img">
+              <path
+                d="M42.7 12.6c3.2-3.8 5.2-9 4.6-12.6-4.7.2-10 3.1-13.1 6.9-2.9 3.4-5.5 8.7-4.7 12.1 5 .4 10.1-2.6 13.2-6.4Zm11.4 28.7c-.2-10 8.1-14.8 8.5-15.1-4.7-6.8-11.9-7.7-14.4-7.8-6.1-.7-11.8 3.6-14.9 3.6-3.2 0-8-3.5-13.2-3.4-6.8.1-13 4-16.5 10-7.2 12.4-1.8 30.7 5.1 40.7 3.4 4.9 7.3 10.4 12.6 10.2 5.1-.2 7.1-3.3 13.3-3.3s8 3.3 13.3 3.2c5.5-.1 9-5 12.3-9.9 3.9-5.6 5.5-11.1 5.6-11.4-.1 0-10.5-4-10.7-16.8Z"
+              ></path>
+            </svg>
+          </span>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2026 AirProof. Guia educativo baseado no arquivo informativo do projeto.</p>
+          <p>Revise caixa, serial, acabamento e conectividade antes de comprar.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
